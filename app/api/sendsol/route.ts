@@ -2,8 +2,11 @@ import { Connection, Keypair, LAMPORTS_PER_SOL, PublicKey, sendAndConfirmTransac
 import { NextRequest, NextResponse } from "next/server";
 import bs58 from "bs58"
 import { Transaction } from "@solana/web3.js";
+import { unstable_noStore as noStore } from "next/cache";
+
 
 export async function POST(req: NextRequest) {
+    noStore()
     const { toPublicKey, fromPublicKey, fromPrivateKey, sol } = await req.json()
     try {
         const connection = new Connection('https://api.devnet.solana.com/', 'confirmed')
